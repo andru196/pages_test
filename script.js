@@ -43,7 +43,7 @@ Username: @${user.username || 'Не указан'}
         try {
             // Отправляем POST-запрос на сервер
             serverResponseElement.textContent = JSON.stringify(webApp);
-            const response = await fetch('http://localhost:3000/api/v2/Auth/Tg', {
+            const response = await fetch('https://wearo.online/api/v2/Auth/Tg', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
