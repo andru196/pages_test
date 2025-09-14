@@ -58,7 +58,7 @@ Username: @${user.username || 'Не указан'}
             const responseData = await response.json();
             
             // Отображаем ответ сервера
-            serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
+            //serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
             responseContainer.style.display = 'block';
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
