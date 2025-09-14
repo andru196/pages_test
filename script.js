@@ -51,6 +51,9 @@ Username: @${user.username || 'Не указан'}
             });
 
             console.log(webApp);
+            console.error(webApp);
+            alert(webApp);
+            serverResponseElement.textContent = JSON.stringify(webApp);
 
             const responseData = await response.json();
             
