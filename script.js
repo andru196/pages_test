@@ -47,7 +47,7 @@ Username: @${user.username || 'Не указан'}
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: initData//JSON.stringify({ initData: initData, wa: JSON.stringify(webApp) })
+                body: JSON.stringify({ initData: initData, wa: JSON.stringify(webApp) })
             });
 
             const responseData = await response.json();
