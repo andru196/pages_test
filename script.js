@@ -45,7 +45,7 @@ Username: @${user.username || 'Не указан'}
             const response = await fetch('http://localhost:3000/api/v2/Auth/Tg', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'text/plain'
+                    'Content-Type': 'application/json'
                 },
                 body: initData//JSON.stringify({ initData: initData, wa: JSON.stringify(webApp) })
             });
