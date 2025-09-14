@@ -1,12 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем, что мы внутри Telegram
-    if (window.Telegram && window.Telegram.WebApp) {
-        const webApp = window.Telegram.WebApp;
+    const webApp = window.Telegram?.WebApp;
+    const initDataElement = document.getElementById('init-data');
+    const userInfoElement = document.getElementById('user-info');
+    const authButton = document.getElementById('auth-button');
+    const responseContainer = document.getElementById('response-container');
+    const serverResponseElement = document.getElementById('server-response');
 
-        // Отображаем initData
-        document.getElementById('init-data').textContent = webApp.initData || 'Init data не получена';
-
-        // Парсим и отображаем данные пользователя
+    if (webApp) {
+        // Отображаем initData и данные пользователя
+        initDataElement.textContent = webApp.initData || 'Init data не получена';
         const user = webApp.initDataUnsafe.user;
         if (user) {
             const userInfo = `
@@ -16,14 +18,50 @@ ID: ${user.id}
 Username: @${user.username || 'Не указан'}
 Язык: ${user.language_code || 'Не указан'}
             `.trim();
-            document.getElementById('user-info').textContent = userInfo;
+            userInfoElement.textContent = userInfo;
         } else {
-            document.getElementById('user-info').textContent = 'Данные пользователя не получены';
+            userInfoElement.textContent = 'Данные пользователя не получены';
         }
-
-        // Расширяем приложение на весь экран
         webApp.expand();
     } else {
-        document.getElementById('init-data').textContent = 'Это приложение работает внутри Telegram Mini Apps. Откройте его через бота.';
+        initDataElement.textContent = 'Это приложение работает внутри Telegram Mini Apps. Откройте его через бота.';
     }
+
+    // Обработчик для кнопки авторизации
+    authButton.addEventListener('click', async function() {
+        const initData = webApp?.initData;
+        if (!initData) {
+            alert('Init data не доступна. Запустите приложение через Telegram.');
+            return;
+        }
+
+        // Блокируем кнопку на время запроса
+        authButton.disabled = true;
+        authButton.textContent = 'Отправка запроса...';
+        responseContainer.style.display = 'none';
+
+        try {
+            // Отправляем POST-запрос на сервер
+            const response = await fetch('https://wearo.online/Auth/Tg', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ initData })
+            });
+
+            const responseData = await response.json();
+            
+            // Отображаем ответ сервера
+            serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
+            responseContainer.style.display = 'block';
+        } catch (error) {
+            console.error('Ошибка при отправке запроса:', error);
+            alert('Произошла ошибка при отправке запроса. Проверьте консоль для подробностей.');
+        } finally {
+            // Разблокируем кнопку
+            authButton.disabled = false;
+            authButton.textContent = 'Тест авторизации (POST)';
+        }
+    });
 });
