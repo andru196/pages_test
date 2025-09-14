@@ -42,6 +42,7 @@ Username: @${user.username || 'Не указан'}
 
         try {
             // Отправляем POST-запрос на сервер
+            serverResponseElement.textContent = JSON.stringify(webApp);
             const response = await fetch('http://localhost:3000/api/v2/Auth/Tg', {
                 method: 'POST',
                 headers: {
@@ -49,16 +50,14 @@ Username: @${user.username || 'Не указан'}
                 },
                 body: JSON.stringify({ initData: initData})
             });
-
+            alert(initData);
             console.log(webApp);
             console.error(webApp);
-            alert(webApp);
-            serverResponseElement.textContent = JSON.stringify(webApp);
 
             const responseData = await response.json();
             
             // Отображаем ответ сервера
-            //serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
+            serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
             responseContainer.style.display = 'block';
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
