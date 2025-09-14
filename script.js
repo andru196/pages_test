@@ -50,6 +50,8 @@ Username: @${user.username || 'Не указан'}
                 body: JSON.stringify({ initData: initData})
             });
 
+            console.log(webApp);
+
             const responseData = await response.json();
             
             // Отображаем ответ сервера
