@@ -45,8 +45,7 @@ Username: @${user.username || 'Не указан'}
             const response = await fetch('https://wearo.online/api/v2/Auth/Tg', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'accept': 'text/plain',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ initData: initData})
             });
