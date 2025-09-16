@@ -42,7 +42,6 @@ Username: @${user.username || 'Не указан'}
 
         try {
             // Отправляем POST-запрос на сервер
-            serverResponseElement.textContent = JSON.stringify(webApp);
             const response = await fetch('https://wearo.online/api/v2/Auth/Tg', {
                 method: 'POST',
                 headers: {
@@ -59,7 +58,6 @@ Username: @${user.username || 'Не указан'}
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
             alert(`Произошла ошибка при отправке запроса. Проверьте консоль для подробностей. ${error}`);
-            alert(response);
             
         } finally {
             // Разблокируем кнопку
