@@ -47,6 +47,7 @@ Username: @${user.username || 'Не указан'}
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'accept': 'text/plain',
                 },
                 body: JSON.stringify({ initData: initData})
             });
