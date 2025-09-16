@@ -51,12 +51,10 @@ Username: @${user.username || 'Не указан'}
                 },
                 body: JSON.stringify({ initData: initData})
             });
-            alert(initData);
             console.log(webApp);
             console.error(webApp);
 
-            const responseData = await response.json();
-            
+            const responseData = await response.json();            
             // Отображаем ответ сервера
             serverResponseElement.textContent = JSON.stringify(responseData, null, 2);
             responseContainer.style.display = 'block';
