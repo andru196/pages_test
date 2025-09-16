@@ -57,7 +57,7 @@ Username: @${user.username || 'Не указан'}
             responseContainer.style.display = 'block';
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
-            alert(`Произошла ошибка при отправке запроса. Проверьте консоль для подробностей. ${error}`);
+            alert(`Произошла ошибка при отправке запроса. Проверьте консоль для подробностей. ${JSON.stringify(error)}`);
         } finally {
             // Разблокируем кнопку
             authButton.disabled = false;
